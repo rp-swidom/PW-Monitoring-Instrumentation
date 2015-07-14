@@ -1,0 +1,5 @@
+<aspectj>
+    <aspects>
+        <aspect name="com.realpage.monitor.instrumentation.aspects.MethodAnnotationAspect"/>
+    </aspects>
+</aspectj>

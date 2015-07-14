@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="R" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${rpMonitoringInstrumentationLogFilePath}</File>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder" />
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <maxIndex>1</maxIndex>
+            <FileNamePattern>${rpMonitoringInstrumentationLogFilePath}.%i</FileNamePattern>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>5MB</MaxFileSize>
+        </triggeringPolicy>
+    </appender>
+    <appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="R"/>
+        <queueSize>1000</queueSize>
+        <discardingThreshold>0</discardingThreshold>
+    </appender>
+    <logger name="com.realpage" level="DEBUG"/>
+    <root level="ERROR">
+        <appender-ref ref="ASYNC"/>
+    </root>
+</configuration>
